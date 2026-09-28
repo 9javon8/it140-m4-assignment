@@ -1,29 +1,58 @@
 # IT 140 Module Four Assignment
 # Higher/Lower Game Pseudocode Template
-#
-# Complete the TODO prompts below with your own pseudocode.
-# Keep this file in .pseudo format for submission.
-#
-# Use clear indentation to show decisions and repeated behavior.
-# Your finished pseudocode should address every requirement in the
-# current Module Four Assignment Guidelines and Rubric.
+START HigherLowerGame
 
-START hilow_game
+    // Step 1: Declare variables
+    DECLARE lowerBound AS INTEGER
+    DECLARE upperBound AS INTEGER
+    DECLARE targetNumber AS INTEGER
+    DECLARE userGuess AS INTEGER
+    DECLARE isGuessed AS BOOLEAN
+    
+    SET isGuessed = FALSE
 
-    # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    // Step 2: Greeting
+    PRINT "Welcome to the higher/lower game, Bella!"
 
-    # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+    // Step 3: Get and validate bounds from the user
+    REPEAT
+        PRINT "Enter the lower bound:"
+        READ lowerBound
+        
+        PRINT "Enter the upper bound:"
+        READ upperBound
+        
+        IF lowerBound >= upperBound THEN
+            PRINT "The lower bound must be less than the upper bound."
+        ENDIF
+    UNTIL lowerBound < upperBound
 
-    # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+    // Step 4: Generate the random target number in range [lowerBound, upperBound]
+    targetNumber = GENERATE_RANDOM_INTEGER(lowerBound, upperBound)
+
+    // Step 5: Initial guess prompt
+    PRINT "Great, now guess a number between " + lowerBound + " and " + upperBound + ":"
+    READ userGuess
+
+    // Step 6: Main game loop
+    WHILE isGuessed == FALSE DO
+        
+        // Input validation for guess range
+        IF userGuess < lowerBound OR userGuess > upperBound THEN
+            PRINT "Nope, too high." // or prompt to enter a valid number within bounds
+        ENDIF
+
+        // Decision branching for the guess
+        IF userGuess < targetNumber THEN
+            PRINT "Nope, too low."
+            PRINT "Guess another number:"
+            READ userGuess
+        ELSE IF userGuess > targetNumber THEN
+            PRINT "Nope, too high."
+            PRINT "Guess another number:"
+            READ userGuess
+        ELSE
+            PRINT "You got it!"
+            SET isGuessed = TRUE
 
 END hilow_game
-
-# === References ===
-# TODO: Add references for sources you used, or delete this line if unused.
